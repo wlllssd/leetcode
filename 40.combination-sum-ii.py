@@ -12,10 +12,10 @@
 # Testcase Example:  '[10,1,2,7,6,1,5]\n8'
 #
 # Given a collection of candidate numbers (candidates) and a target number
-# (target), find all unique combinations in candidates where the candidate
+# (target), find all unique combinations in candidates where the candidate
 # numbers sums to target.
 # 
-# Each number in candidates may only be used once in the combination.
+# Each number in candidates may only be used once in the combination.
 # 
 # Note:
 # 
@@ -27,7 +27,7 @@
 # Example 1:
 # 
 # 
-# Input: candidates = [10,1,2,7,6,1,5], target = 8,
+# Input: candidates = [10,1,2,7,6,1,5], target = 8,
 # A solution set is:
 # [
 # ⁠ [1, 7],
@@ -40,7 +40,7 @@
 # Example 2:
 # 
 # 
-# Input: candidates = [2,5,2,1,2], target = 5,
+# Input: candidates = [2,5,2,1,2], target = 5,
 # A solution set is:
 # [
 # [1,2,2],
@@ -51,15 +51,18 @@
 #
 class Solution:
     def dfs(self, nums, start, path, target, res):
-        if target == 0:
+        if target <= 0:
             res.append(path)
             return
         for i in range(start,len(nums)):
+            if i > start and nums[i] == nums[i-1]:
+                continue
             if nums[i] > target:
                 break
-            self.dfs(nums, i+1, path.append(nums[i]), target-nums[i], res)
+            self.dfs(nums, i+1, path+[nums[i]], target-nums[i], res)
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         res = []
+        candidates.sort()
         self.dfs(candidates,0,[],target,res)
         return res
 
