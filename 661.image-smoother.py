@@ -43,13 +43,14 @@
 import copy
 import math
 
+
 class Solution:
     def imageSmoother(self, M: List[List[int]]) -> List[List[int]]:
         adj = [[0, 0], [-1, 0], [-1, 1], [-1, -1],
                [0, 1], [0, -1], [1, -1], [1, 0], [1, 1]]
         res = copy.deepcopy(M)
         row, col = len(M), len(M[0])
-        angle = [[0,0],[0,col-1],[row-1,0],[row-1,col-1]]
+        angle = [[0, 0], [0, col-1], [row-1, 0], [row-1, col-1]]
         for i in range(row):
             for j in range(col):
                 total = 9
@@ -61,4 +62,3 @@ class Solution:
                     value += M[i+ele[0]][j+ele[1]]
                 res[i][j] = math.floor(value/total)
         return res
-
